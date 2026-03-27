@@ -2,7 +2,7 @@
 
 This repo is set up to test CircleCI bulk artifact uploads for a directory with nested subfolders and mixed file types.
 
-The pipeline generates this artifact tree during the job and uploads it with a single `store_artifacts` step using `destination: bulk-upload-demo`:
+The pipeline generates this artifact tree during the job with `scripts/generate-circleci-artifacts-demo.sh` and uploads it with a single `store_artifacts` step using `destination: bulk-upload-demo`:
 
 - `site/index.html`
 - `media/diagram.svg`
