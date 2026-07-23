@@ -5,6 +5,7 @@ This repo is set up to test CircleCI bulk artifact uploads for a directory with 
 The pipeline generates this artifact tree during the job with `scripts/generate-circleci-artifacts-demo.sh` and uploads it with a single `store_artifacts` step using `destination: bulk-upload-demo`:
 
 - `site/index.html`
+- `site/subpage/index.html`
 - `media/diagram.svg`
 - `media/pixel.png`
 - `reports/data/sample.json`
@@ -19,6 +20,7 @@ After the job passes, open the CircleCI job page and go to the `Artifacts` tab. 
 Good files to click in the browser:
 
 - `bulk-upload-demo/site/index.html`
+- `bulk-upload-demo/site/subpage/index.html`
 - `bulk-upload-demo/media/diagram.svg`
 - `bulk-upload-demo/media/pixel.png`
 - `bulk-upload-demo/reports/data/sample.json`

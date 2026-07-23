@@ -11,7 +11,8 @@ mkdir -p \
   "${ARTIFACT_ROOT}/media" \
   "${ARTIFACT_ROOT}/nested/deeper" \
   "${ARTIFACT_ROOT}/reports/data" \
-  "${ARTIFACT_ROOT}/site"
+  "${ARTIFACT_ROOT}/site" \
+  "${ARTIFACT_ROOT}/site/subpage"
 
 cat > "${ARTIFACT_ROOT}/site/index.html" <<'HTML'
 <!doctype html>
@@ -95,12 +96,72 @@ cat > "${ARTIFACT_ROOT}/site/index.html" <<'HTML'
         <li><code>bulk-upload-demo/reports/report.xml</code></li>
         <li><code>bulk-upload-demo/logs/build.log</code></li>
         <li><code>bulk-upload-demo/nested/deeper/notes.txt</code></li>
+        <li><code>bulk-upload-demo/site/subpage/index.html</code></li>
         <li><code>bulk-upload-demo/manifest/tree.txt</code></li>
       </ul>
+      <h2>Navigation test</h2>
+      <p>Click the link below to open the nested page and confirm relative navigation works in the CircleCI artifact browser:</p>
+      <p><a href="subpage/index.html">→ Go to site/subpage/index.html</a></p>
       <h2>What this proves</h2>
       <p><span class="swatch"></span>Directory uploads keep subfolder structure.</p>
       <p><span class="swatch"></span>Browser-friendly files can be opened directly from the artifact list.</p>
       <p><span class="swatch"></span><code>destination: bulk-upload-demo</code> adds a stable prefix to the uploaded paths.</p>
+    </section>
+  </main>
+</body>
+</html>
+HTML
+
+cat > "${ARTIFACT_ROOT}/site/subpage/index.html" <<'HTML'
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nested Page – CircleCI Artifact Navigation Test</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f1e8;
+      --card: #fffdf8;
+      --ink: #1f2933;
+      --accent: #0f766e;
+      --border: #d9d2c3;
+    }
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: linear-gradient(180deg, #efe7d6 0%, var(--bg) 100%);
+      color: var(--ink);
+    }
+    main {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 24px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(31, 41, 51, 0.08);
+    }
+    h1 { margin-top: 0; }
+    p { line-height: 1.6; }
+    code {
+      background: #efe7d6;
+      border-radius: 4px;
+      padding: 0.1rem 0.35rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="card">
+      <h1>Nested Page</h1>
+      <p>You navigated from <code>site/index.html</code> to <code>site/subpage/index.html</code> using a relative link.</p>
+      <p>If you can read this, the CircleCI artifact browser resolved the relative URL correctly.</p>
+      <p><a href="../index.html">← Back to site/index.html</a></p>
     </section>
   </main>
 </body>
@@ -137,6 +198,7 @@ cat > "${ARTIFACT_ROOT}/reports/data/sample.json" <<'JSON'
   "artifact_prefix": "bulk-upload-demo",
   "open_in_browser": [
     "site/index.html",
+    "site/subpage/index.html",
     "media/diagram.svg",
     "media/pixel.png",
     "reports/data/sample.json",
@@ -151,6 +213,7 @@ JSON
 cat > "${ARTIFACT_ROOT}/reports/data/sample.csv" <<'CSV'
 file_type,path,browser_expectation
 html,site/index.html,rendered page
+html,site/subpage/index.html,rendered page (navigation test)
 svg,media/diagram.svg,rendered vector image
 png,media/pixel.png,rendered image
 json,reports/data/sample.json,raw text/JSON
@@ -176,7 +239,7 @@ TXT
 
 cat > "${ARTIFACT_ROOT}/logs/build.log" <<'LOG'
 [artifact-browser-demo] generating nested artifact bundle
-[artifact-browser-demo] writing HTML, SVG, PNG, JSON, CSV, XML, and TXT examples
+[artifact-browser-demo] writing HTML (site/index.html + site/subpage/index.html), SVG, PNG, JSON, CSV, XML, and TXT examples
 [artifact-browser-demo] uploading /tmp/circleci-artifacts-demo as a single directory artifact source
 LOG
 
