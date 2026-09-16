@@ -11,6 +11,9 @@ The pipeline generates this artifact tree during the job with `scripts/generate-
 - `reports/data/sample.json`
 - `reports/data/sample.csv`
 - `reports/report.xml`
+- `reports/jacoco/index.html`
+- `reports/jacoco/jacoco-resources/*`
+- `documents/sample.pdf`
 - `logs/build.log`
 - `nested/deeper/notes.txt`
 - `manifest/tree.txt`
@@ -26,6 +29,8 @@ Good files to click in the browser:
 - `bulk-upload-demo/reports/data/sample.json`
 - `bulk-upload-demo/reports/data/sample.csv`
 - `bulk-upload-demo/reports/report.xml`
+- `bulk-upload-demo/reports/jacoco/index.html`
+- `bulk-upload-demo/documents/sample.pdf`
 - `bulk-upload-demo/logs/build.log`
 - `bulk-upload-demo/nested/deeper/notes.txt`
 
@@ -34,3 +39,4 @@ Why it is structured this way:
 - CircleCI’s `store_artifacts` step accepts a file or a directory `path`.
 - `destination` adds a prefix to the artifact paths.
 - CircleCI docs recommend compressing only when you are uploading a very large number of artifacts.
+- The JaCoCo landing page and its required assets are downloaded from `https://www.jacoco.org/jacoco/trunk/coverage/` during the job. Package drill-down links open the live official report.
