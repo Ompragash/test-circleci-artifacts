@@ -99,6 +99,7 @@ cat > "${ARTIFACT_ROOT}/site/index.html" <<'HTML'
         <li><code>bulk-upload-demo/reports/report.xml</code></li>
         <li><code>bulk-upload-demo/reports/jacoco/index.html</code></li>
         <li><code>bulk-upload-demo/documents/sample.pdf</code></li>
+        <li><code>bulk-upload-demo/newfile</code></li>
         <li><code>bulk-upload-demo/logs/build.log</code></li>
         <li><code>bulk-upload-demo/nested/deeper/notes.txt</code></li>
         <li><code>bulk-upload-demo/site/subpage/index.html</code></li>
@@ -195,6 +196,8 @@ base64 -d > "${ARTIFACT_ROOT}/documents/sample.pdf" <<'BASE64'
 JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA2MTIgNzkyXSAvUmVzb3VyY2VzIDw8IC9Gb250IDw8IC9GMSA1IDAgUiA+PiA+PiAvQ29udGVudHMgNCAwIFIgPj4KZW5kb2JqCjQgMCBvYmoKPDwgL0xlbmd0aCAxOTggPj4Kc3RyZWFtCkJUCi9GMSAyNCBUZgo3MiA3MDAgVGQKKENpcmNsZUNJIEFydGlmYWN0IFBERiBEZW1vKSBUagovRjEgMTIgVGYKMCAtMzYgVGQKKFRoaXMgUERGIHdhcyBnZW5lcmF0ZWQgZHVyaW5nIHRoZSBhcnRpZmFjdC1icm93c2VyLWRlbW8gam9iLikgVGoKMCAtMjAgVGQKKE9wZW4gaXQgZnJvbSB0aGUgQ2lyY2xlQ0kgQXJ0aWZhY3RzIHRhYi4pIFRqCkVUCmVuZHN0cmVhbQplbmRvYmoKNSAwIG9iago8PCAvVHlwZSAvRm9udCAvU3VidHlwZSAvVHlwZTEgL0Jhc2VGb250IC9IZWx2ZXRpY2EgPj4KZW5kb2JqCnhyZWYKMCA2CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDAwOSAwMDAwMCBuIAowMDAwMDAwMDU4IDAwMDAwIG4gCjAwMDAwMDAxMTUgMDAwMDAgbiAKMDAwMDAwMDI0MSAwMDAwMCBuIAowMDAwMDAwNDg5IDAwMDAwIG4gCnRyYWlsZXIKPDwgL1NpemUgNiAvUm9vdCAxIDAgUiA+PgpzdGFydHhyZWYKNTU5CiUlRU9GCg==
 BASE64
 
+echo "something" >> "${ARTIFACT_ROOT}/newfile"
+
 cat > "${ARTIFACT_ROOT}/media/diagram.svg" <<'SVG'
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360">
   <rect width="720" height="360" fill="#f5f1e8"/>
@@ -233,6 +236,7 @@ cat > "${ARTIFACT_ROOT}/reports/data/sample.json" <<'JSON'
     "reports/report.xml",
     "reports/jacoco/index.html",
     "documents/sample.pdf",
+    "newfile",
     "logs/build.log",
     "nested/deeper/notes.txt"
   ]
@@ -250,6 +254,7 @@ csv,reports/data/sample.csv,raw text/CSV
 xml,reports/report.xml,raw text/XML
 html,reports/jacoco/index.html,rendered JaCoCo coverage report
 pdf,documents/sample.pdf,inline PDF viewer or download
+no-extension,newfile,raw text without a file extension
 txt,nested/deeper/notes.txt,raw text
 log,logs/build.log,raw text
 CSV
@@ -271,6 +276,7 @@ TXT
 cat > "${ARTIFACT_ROOT}/logs/build.log" <<'LOG'
 [artifact-browser-demo] generating nested artifact bundle
 [artifact-browser-demo] writing HTML (site/index.html + site/subpage/index.html), SVG, PNG, JSON, CSV, XML, PDF, and TXT examples
+[artifact-browser-demo] writing an extensionless text artifact at newfile
 [artifact-browser-demo] snapshotting the official JaCoCo coverage report landing page
 [artifact-browser-demo] uploading /tmp/circleci-artifacts-demo as a single directory artifact source
 LOG

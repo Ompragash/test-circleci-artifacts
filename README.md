@@ -14,6 +14,7 @@ The pipeline generates this artifact tree during the job with `scripts/generate-
 - `reports/jacoco/index.html`
 - `reports/jacoco/jacoco-resources/*`
 - `documents/sample.pdf`
+- `newfile` (plain text without a file extension)
 - `logs/build.log`
 - `nested/deeper/notes.txt`
 - `manifest/tree.txt`
@@ -31,6 +32,7 @@ Good files to click in the browser:
 - `bulk-upload-demo/reports/report.xml`
 - `bulk-upload-demo/reports/jacoco/index.html`
 - `bulk-upload-demo/documents/sample.pdf`
+- `bulk-upload-demo/newfile`
 - `bulk-upload-demo/logs/build.log`
 - `bulk-upload-demo/nested/deeper/notes.txt`
 
